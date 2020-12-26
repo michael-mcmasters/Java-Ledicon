@@ -6,16 +6,29 @@
 // Default: Class, Package
 // Private: Class, Variable
 
-// Packages can have all 4 access modifiers.
-private package com.company.fouraccessmodifiers;
+// public: Any class can access it.
+// protected: Only classes in the same package, and subclasses even if they're in another package, can access it.
+// default: Only classes in the same package can access it. (Not subclasses in another package.)
+// private: Only this class can access it.
+
+// Packages can have all 4 access modifiers (I think. Changed it to nothing because I was getting run-time errors.)
+package com.company.fouraccessmodifiers;
 
 // Classes must always be public. Unless they're a child class, in which they can be protected.
 public class AccessModifiers {
 
-    // Nested classes can be protected or private.
+    // Nested classes can be protected, private, or public. Not default.
     protected class NestedClassOne { }
     private class NestedClass2 { }
+    public class NestedClass3 { }
 
+    // If you give no access modifier, it automatically assigns it to default. Meaning only classes in the same package can access it.
+    int number;
+    void doSomething() {
+
+    }
+    // Note that you can't explicity type "default int number;" or "default void doSomething() { }"
+    // You have to just write "int number;" or "void doSomething()" and it is put in automatically.
 
     public void doSomething1() {
 
@@ -26,28 +39,36 @@ public class AccessModifiers {
     protected void doSomething2() {
 
     }
-
-    // Default methods only go in interfaces (and abstract classes maybe?)
 }
 
 
 interface Inter {
 
-    public void publicMethod();  // Can't have body. Must be inherited. (It's Abstract.)
+    // Properties can only be default or public. Child class can access them.
+    int number1 = 1;
+    public int number2 = 2;
 
-    private void privateMethod() {
-        // Must have body. Can't be inherited. (It's private and used for this interface only.)
-    }
 
+
+    // Is abstract. Can never have body and must be inherited.
+    public void publicMethod();
+
+    // Use default to put behaviour in an interface. (Must write default in interfaces.)
+    // Inheritance is optional.
+    // Works like a public method in a regular class.
     default void defaultMethod() {
-        // Must have body. Can be inherited. (Inheriting is optional.)
+
     }
 
-        // protected methods don't exist for interfaces.
+    // Private function only for this class. Can't be inherited.
+    private void privateMethod() {
+    }
+
+    // protected methods don't exist for interfaces.
 }
 
-// Subclasses can be protected.
-protected class SubClass implements Inter {
+// Subclasses can be protected (I think. But can't show that with two classes in same file.)
+class SubClass implements Inter {
 
     // Have to override this
     @Override
@@ -55,7 +76,8 @@ protected class SubClass implements Inter {
         defaultMethod();
     }
 
-    // Overriding default methods is optional. But you must use the "public" access modifier if doing so.
+    // Can override this. It's optional for default methods.
+    // If you do override a default method you must make the override public.
     @Override
     public void defaultMethod() {
 
