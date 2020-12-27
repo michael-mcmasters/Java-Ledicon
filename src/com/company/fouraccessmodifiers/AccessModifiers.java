@@ -53,7 +53,7 @@ interface Inter {
     // Is abstract. Can never have body and must be inherited.
     public void publicMethod();
 
-    // Use default to put behaviour in an interface. (Must write default in interfaces.)
+    // Use default to put behaviour in an interface. (You have to write default when using interfaces.)
     // Inheritance is optional.
     // Works like a public method in a regular class.
     default void defaultMethod() {
@@ -83,3 +83,9 @@ class SubClass implements Inter {
 
     }
 }
+
+
+
+
+
+
