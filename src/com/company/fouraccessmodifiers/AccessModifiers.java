@@ -45,7 +45,7 @@ public class AccessModifiers {
 interface Inter {
 
     // Properties can only be default or public. Child class can access them.
-    int number1 = 1;
+    int number1 = 1;                // properties/methods are always final and static even if you don't write it.
     public int number2 = 2;
 
 
